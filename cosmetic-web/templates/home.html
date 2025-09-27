@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Serenique Herbal Skincare</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts for modern luxury look -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --soft-blush: #EAD8CE;    /* Primary Background */
+            --rich-gold: #D4AF37;     /* Main Accent for CTAs */
+            --muted-mauve: #B18699;   /* Secondary Background */
+            --deep-purple: #7A5161;   /* Text Color */
+            --ivory-white: #F9F6F2;   /* Highlight/Contrast */
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(135deg, var(--ivory-white) 70%, var(--soft-blush), var(--muted-mauve));
+            color: var(--deep-purple);
+            overflow-x: hidden;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            padding: 16px 5vw;
+            background: rgba(249, 246, 242, 0.70);
+            box-shadow: 0 3px 12px 0 rgba(177, 134, 153, 0.11);
+            animation: fadeIn 1s ease-out;
+        }
+        .logo-img {
+            height: 48px;
+            width: 48px;
+            object-fit: contain;
+            background: var(--soft-blush);
+            border-radius: 20%;
+            box-shadow: 0 2px 10px 0 rgba(177, 134, 153, 0.13);
+            margin-right: 12px;
+            border: 1px solid var(--muted-mauve);
+            animation: scaleIn 1s ease-out;
+        }
+        header h1 {
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            color: var(--deep-purple);
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            animation: scaleIn 1s ease-out;
+        }
+        nav {
+            margin-left: auto;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--deep-purple);
+            font-weight: 500;
+            margin: 0 10px;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--muted-mauve);
+            transition: width 0.3s ease-in-out;
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+        nav a:hover {
+            color: var(--muted-mauve);
+        }
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 48px 5vw 32px 5vw;
+        }
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--muted-mauve);
+            margin-bottom: 12px;
+            margin-top: 10px;
+            animation: slideUp 1s ease-out;
+        }
+        .hero-sub {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            color: var(--deep-purple);
+            animation: slideUp 1s ease-out 0.2s;
+            animation-fill-mode: backwards;
+        }
+        .cta-btn {
+            background: linear-gradient(90deg, var(--rich-gold), var(--muted-mauve));
+            color: var(--ivory-white);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            padding: 12px 32px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 2px 10px rgba(177, 134, 153, 0.09);
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: slideUp 1s ease-out 0.4s;
+            animation-fill-mode: backwards;
+        }
+        .cta-btn:hover {
+            background: linear-gradient(90deg, var(--muted-mauve), var(--rich-gold));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(177, 134, 153, 0.2);
+        }
+        section.products {
+            padding: 36px 5vw;
+            background: rgba(249, 246, 242, 0.97);
+        }
+        .products-title {
+            text-align: center;
+            color: var(--deep-purple);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            animation: fadeIn 1s ease-out;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+            justify-items: center;
+        }
+        .product-card {
+            background: linear-gradient(125deg, var(--soft-blush) 68%, var(--ivory-white));
+            border-radius: 12px;
+            box-shadow: 0 3px 12px 0 rgba(177, 134, 153, 0.11);
+            padding: 20px 12px;
+            text-align: center;
+            max-width: 280px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--soft-blush);
+            animation: fadeInUp 1s ease-out;
+            animation-delay: calc(var(--order) * 0.2s);
+            animation-fill-mode: backwards;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 24px 0 rgba(177, 134, 153, 0.21);
+        }
+        .product-img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px 0 rgba(212, 175, 55, 0.09);
+            margin-bottom: 10px;
+            border: 1px solid var(--rich-gold);
+        }
+        .product-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--muted-mauve);
+            margin-bottom: 6px;
+        }
+        .product-desc {
+            font-size: 0.9rem;
+            color: var(--deep-purple);
+            margin-bottom: 10px;
+        }
+        .product-price {
+            color: var(--rich-gold);
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        .buy-btn {
+            background: var(--muted-mauve);
+            color: var(--ivory-white);
+            border: none;
+            border-radius: 18px;
+            padding: 8px 22px;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .buy-btn:hover {
+            background: var(--deep-purple);
+            transform: translateY(-2px);
+        }
+        section.about {
+            padding: 30px 5vw;
+            text-align: center;
+            background: linear-gradient(120deg, var(--ivory-white) 65%, var(--soft-blush), var(--muted-mauve));
+        }
+        .about-title {
+            font-size: 1.4rem;
+            color: var(--muted-mauve);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            animation: slideUp 1s ease-out;
+        }
+        .about-desc {
+            margin: 14px auto 16px auto;
+            max-width: 550px;
+            color: var(--deep-purple);
+            font-size: 1rem;
+            animation: slideUp 1s ease-out 0.2s;
+            animation-fill-mode: backwards;
+        }
+        .about-logo {
+            margin-top: 8px;
+            width: 100px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.13);
+            animation: slideUp 1s ease-out 0.4s;
+            animation-fill-mode: backwards;
+        }
+        footer {
+            background: var(--muted-mauve);
+            color: var(--ivory-white);
+            font-family: 'Raleway', sans-serif;
+            padding: 40px 5vw 20px 5vw;
+            border-radius: 20px 20px 0 0;
+            margin-top: 30px;
+            animation: fadeIn 1s ease-out;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+        .footer-section {
+            margin-bottom: 20px;
+        }
+        .footer-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--ivory-white);
+            margin-bottom: 10px;
+        }
+        .footer-section p, .footer-section a {
+            font-size: 0.9rem;
+            color: var(--ivory-white);
+            margin: 5px 0;
+            line-height: 1.5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-section a:hover {
+            color: var(--rich-gold);
+        }
+        .footer-section .social-links a {
+            margin-right: 10px;
+        }
+        .footer-copyright {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 0.85rem;
+            margin-top: 20px;
+            border-top: 1px solid rgba(249, 246, 242, 0.2);
+            padding-top: 10px;
+        }
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        /* Responsive Design */
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 12px 3vw;
+            }
+            .logo-img {
+                height: 40px;
+                width: 40px;
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+            header h1 {
+                font-size: 1.4rem;
+            }
+            nav {
+                margin-left: 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav a {
+                margin: 5px 8px;
+                font-size: 0.9rem;
+            }
+            .hero {
+                padding: 30px 3vw;
+            }
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            .hero-sub {
+                font-size: 1rem;
+            }
+            .cta-btn {
+                padding: 10px 28px;
+                font-size: 0.9rem;
+            }
+            .product-list {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .product-card {
+                max-width: 100%;
+                padding: 16px 10px;
+            }
+            .product-img {
+                width: 80px;
+                height: 80px;
+            }
+            .about-title {
+                font-size: 1.2rem;
+            }
+            .about-desc {
+                font-size: 0.9rem;
+                max-width: 90%;
+            }
+            .about-logo {
+                width: 80px;
+            }
+            footer {
+                grid-template-columns: 1fr;
+                padding: 30px 3vw 15px 3vw;
+                text-align: center;
+            }
+            .footer-section h3 {
+                font-size: 1.1rem;
+            }
+            .footer-section p, .footer-section a {
+                font-size: 0.85rem;
+            }
+            .footer-section .social-links a {
+                margin: 0 5px;
+            }
+        }
+        @media (min-width: 701px) and (max-width: 1200px) {
+            header {
+                padding: 14px 4vw;
+            }
+            .logo-img {
+                height: 44px;
+                width: 44px;
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
+            nav a {
+                margin: 0 8px;
+                font-size: 0.9rem;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-sub {
+                font-size: 1.05rem;
+            }
+            .product-list {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+            .product-card {
+                max-width: 260px;
+            }
+            .product-img {
+                width: 85px;
+                height: 85px;
+            }
+            .about-logo {
+                width: 90px;
+            }
+            footer {
+                padding: 35px 4vw 15px 4vw;
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo.jpg') }}" class="logo-img" alt="Serenique Herbal Luxury Logo">
+        <h1>Serenique</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <section class="hero" id="home">
+        <div class="hero-title">Natural Herbal Luxury for Your Skin</div>
+        <div class="hero-sub">
+            Serenique blends premium botanicals and modern science for radiant beauty and professional care.
+            <br>Pure, safe, and visibly transformative.
+        </div>
+        <button class="cta-btn">Shop Now</button>
+    </section>
+    <section class="products" id="products">
+        <div class="products-title">Our Herbal Collection</div>
+        <div class="product-list">
+            <div class="product-card" style="--order: 1;">
+                <img class="product-img" src="{{ url_for('static', filename='cream.jpg') }}" alt="Herbal Luxury Cream">
+                <div class="product-name">Herbal Luxury Cream</div>
+                <div class="product-desc">Radiant, firm skin with gentle botanicals and advanced retinol. Suitable for all skin types.</div>
+                <div class="product-price">₹1299</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="product-card" style="--order: 2;">
+                <img class="product-img" src="{{ url_for('static', filename='perfume.jpg') }}" alt="Herbal Essence Perfume">
+                <div class="product-name">Herbal Essence Perfume</div>
+                <div class="product-desc">A luxurious fragrance with a blend of natural herbs for an enchanting scent.</div>
+                <div class="product-price">₹1499</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="product-card" style="--order: 3;">
+                <img class="product-img" src="{{ url_for('static', filename='lip.jpg') }}" alt="Herbal Lip Balm">
+                <div class="product-name">Herbal Lip Balm</div>
+                <div class="product-desc">Nourishing lip care with herbal extracts for soft, hydrated lips.</div>
+                <div class="product-price">₹499</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="about-title">Why Serenique?</div>
+        <div class="about-desc">
+            Embrace the promise of pure, radiant skin. Serenique products are crafted with ethically sourced herbs, fusing tradition, care, and modern techniques for luminous, healthy skin. Each formula is a celebration of nature, elegance, and professional excellence.
+        </div>
+        <img src="{{ url_for('static', filename='logo.jpg') }}" class="about-logo" alt="Serenique Brand Logo">
+    </section>
+    <footer id="contact">
+        <div class="footer-section">
+            <h3>About Serenique</h3>
+            <p>Serenique is dedicated to crafting premium herbal skincare that blends nature’s finest ingredients with cutting-edge science, delivering radiant beauty with every use.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Phone: <a href="tel:+917566592709">+91 75665 92709</a></p>
+            <p>Email: <a href="mailto:support@serenique.com">support@serenique.com</a></p>
+            <p>Address: 123 Herbal Lane, Mumbai, India</p>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-links">
+                <a href="https://instagram.com/sereniqueskin" target="_blank">Instagram</a>
+                <a href="https://x.com/sereniqueskin" target="_blank">X</a>
+                <a href="https://facebook.com/sereniqueskin" target="_blank">Facebook</a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2025 Serenique – Herbal Luxury Skincare. Crafted with elegance for you.
+        </div>
+    </footer>
+</body>
+</html>
