@@ -8,11 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --soft-blush: #EAD8CE;    /* Primary Background */
-            --rich-gold: #D4AF37;     /* Main Accent for CTAs */
-            --muted-mauve: #B18699;   /* Secondary Background */
-            --deep-purple: #7A5161;   /* Text Color */
-            --ivory-white: #F9F6F2;   /* Highlight/Contrast */
+            --soft-blush: #EAD8CE; /* Primary Background */
+            --rich-gold: #D4AF37; /* Main Accent for CTAs */
+            --muted-mauve: #B18699; /* Secondary Background */
+            --deep-purple: #7A5161; /* Text Color */
+            --ivory-white: #F9F6F2; /* Highlight/Contrast */
         }
         * {
             box-sizing: border-box;
@@ -463,7 +463,7 @@
         <div class="about-desc">
             Embrace the promise of pure, radiant skin. Serenique products are crafted with ethically sourced herbs, fusing tradition, care, and modern techniques for luminous, healthy skin. Each formula is a celebration of nature, elegance, and professional excellence.
         </div>
-        <img src="{{ url_for('static', filename='logo.jpg') }}" class="about-logo" alt="Serenique Brand Logo">
+        <img src="{{ url_for('static', filename='logo.png') }}" class="about-logo" alt="Serenique Brand Logo">
     </section>
     <footer id="contact">
         <div class="footer-section">
@@ -488,6 +488,18 @@
             &copy; 2025 Serenique – Herbal Luxury Skincare. Crafted with elegance for you.
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buyButtons = document.querySelectorAll('.buy-btn');
+            buyButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    // Prevent any default behavior if needed (though not a form submit)
+                    event.preventDefault();
+                    const productName = this.parentElement.querySelector('.product-name').textContent;
+                    alert(`${productName} has been added to your cart!`);
+                });
+            });
+        });
+    </script>
 </body>
-
 </html>
