@@ -411,6 +411,56 @@
                 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             }
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(122, 81, 97, 0.4); /* Semi-transparent deep-purple */
+            animation: fadeIn 0.5s;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, var(--ivory-white) 60%, var(--soft-blush));
+            margin: 15% auto;
+            padding: 20px;
+            border: 2px solid var(--rich-gold);
+            border-radius: 15px;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(177, 134, 153, 0.3);
+            text-align: center;
+            animation: scaleIn 0.5s ease-out;
+        }
+        .close {
+            color: var(--deep-purple);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: var(--muted-mauve);
+            text-decoration: none;
+        }
+        #modalMessage {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            color: var(--deep-purple);
+            margin: 10px 0;
+        }
+        .modal-icon {
+            font-size: 2rem;
+            color: var(--rich-gold);
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -427,7 +477,7 @@
     <section class="hero" id="home">
         <div class="hero-title">Natural Herbal Luxury for Your Skin</div>
         <div class="hero-sub">
-            Serenique blends premium botanicals and modern science for radiant beauty and professional care.
+            Serenique blends premium Botanicals and modern science for radiant beauty and professional care.
             <br>Pure, safe, and visibly transformative.
         </div>
         <button class="cta-btn">Shop Now</button>
@@ -438,7 +488,7 @@
             <div class="product-card" style="--order: 1;">
                 <img class="product-img" src="{{ url_for('static', filename='cream.jpg') }}" alt="Herbal Luxury Cream">
                 <div class="product-name">Herbal Luxury Cream</div>
-                <div class="product-desc">Radiant, firm skin with gentle botanicals and advanced retinol. Suitable for all skin types.</div>
+                <div class="product-desc">Radiant, firm skin with gentle Botanicals and advanced retinol. Suitable for all skin types.</div>
                 <div class="product-price">₹1100</div>
                 <button class="buy-btn">Buy Now</button>
             </div>
@@ -488,19 +538,42 @@
             &copy; 2025 Serenique – Herbal Luxury Skincare. Crafted with elegance for you.
         </div>
     </footer>
+
+    <!-- Modal Structure -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-icon">&#10003;</div> <!-- Checkmark icon -->
+            <p id="modalMessage"></p>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const buyButtons = document.querySelectorAll('.buy-btn');
+            const modal = document.getElementById('cartModal');
+            const closeBtn = document.querySelector('.close');
+            const modalMessage = document.getElementById('modalMessage');
+
             buyButtons.forEach(button => {
                 button.addEventListener('click', function(event) {
-                    // Prevent any default behavior if needed (though not a form submit)
                     event.preventDefault();
                     const productName = this.parentElement.querySelector('.product-name').textContent;
-                    alert(`${productName} has been added to your cart!`);
+                    modalMessage.textContent = `${productName} has been added to your cart!`;
+                    modal.style.display = 'block';
                 });
+            });
+
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
             });
         });
     </script>
 </body>
 </html>
-
