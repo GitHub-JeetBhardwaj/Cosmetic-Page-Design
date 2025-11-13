@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Fonts for modern luxury look -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         :root {
             --soft-blush: #EAD8CE; /* Primary Background */
@@ -54,6 +56,8 @@
         }
         nav {
             margin-left: auto;
+            display: flex;
+            align-items: center;
         }
         nav a {
             text-decoration: none;
@@ -79,6 +83,25 @@
         }
         nav a:hover {
             color: var(--muted-mauve);
+        }
+        .cart-link {
+            margin-left: 10px;
+            position: relative;
+        }
+        .cart-link i {
+            font-size: 1.2rem;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--rich-gold);
+            color: var(--ivory-white);
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            min-width: 16px;
+            text-align: center;
         }
         .hero {
             display: flex;
@@ -411,7 +434,6 @@
                 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             }
         }
-
         /* Modal Styles */
         .modal {
             display: none;
@@ -472,12 +494,13 @@
             <a href="#products">Products</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
+            <a href="#cart" class="cart-link"><i class="fas fa-shopping-cart"></i><span id="cart-count" class="cart-count">0</span></a>
         </nav>
     </header>
     <section class="hero" id="home">
         <div class="hero-title">Natural Herbal Luxury for Your Skin</div>
         <div class="hero-sub">
-            Serenique blends premium Botanicals and modern science for radiant beauty and professional care.
+            Serenique blends premium botanicals and modern science for radiant beauty and professional care.
             <br>Pure, safe, and visibly transformative.
         </div>
         <button class="cta-btn">Shop Now</button>
@@ -488,7 +511,7 @@
             <div class="product-card" style="--order: 1;">
                 <img class="product-img" src="{{ url_for('static', filename='cream.jpg') }}" alt="Herbal Luxury Cream">
                 <div class="product-name">Herbal Luxury Cream</div>
-                <div class="product-desc">Radiant, firm skin with gentle Botanicals and advanced retinol. Suitable for all skin types.</div>
+                <div class="product-desc">Radiant, firm skin with gentle botanicals and advanced retinol. Suitable for all skin types.</div>
                 <div class="product-price">₹1100</div>
                 <button class="buy-btn">Buy Now</button>
             </div>
@@ -538,7 +561,6 @@
             &copy; 2025 Serenique – Herbal Luxury Skincare. Crafted with elegance for you.
         </div>
     </footer>
-
     <!-- Modal Structure -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
@@ -547,13 +569,14 @@
             <p id="modalMessage"></p>
         </div>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            let cartCount = 0;
             const buyButtons = document.querySelectorAll('.buy-btn');
             const modal = document.getElementById('cartModal');
             const closeBtn = document.querySelector('.close');
             const modalMessage = document.getElementById('modalMessage');
+            const cartCountElement = document.getElementById('cart-count');
 
             buyButtons.forEach(button => {
                 button.addEventListener('click', function(event) {
@@ -561,6 +584,8 @@
                     const productName = this.parentElement.querySelector('.product-name').textContent;
                     modalMessage.textContent = `${productName} has been added to your cart!`;
                     modal.style.display = 'block';
+                    cartCount++;
+                    cartCountElement.textContent = cartCount;
                 });
             });
 
